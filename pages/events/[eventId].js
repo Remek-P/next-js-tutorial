@@ -1,17 +1,13 @@
-import { useRouter } from "next/router";
-import { getEventById } from "@/data/dummy-data";
-import EventSummary from "@/components/eventDetail/event-summary";
-import EventLogistics from "@/components/eventDetail/event-logistics";
-import EventContent from "@/components/eventDetail/event-content";
+import { getEventById, getFeaturedEvents } from "@/helpers/api-util";
+import EventSummary from "@/components/event-detail/event-summary";
+import EventLogistics from "@/components/event-detail/event-logistics";
+import EventContent from "@/components/event-detail/event-content";
 import ErrorAlert from "@/components/UI/error-alert";
 import Button from "@/components/UI/Button";
 
-function EventDetailPage() {
+function EventDetailPage({ selectedEvent }) {
 
-  const router = useRouter();
-
-  const eventId = router.query.eventId;
-  const event = getEventById(eventId);
+  const event = selectedEvent;
 
   if (!event) {
     return (
@@ -39,6 +35,31 @@ function EventDetailPage() {
         </EventContent>
       </>
   )
+}
+
+export async function getStaticProps(context) {
+
+  const eventID = context.params.eventId;
+
+  const event = await getEventById(eventID)
+
+  return {
+    props: {
+      selectedEvent: event
+    },
+    revalidate: 300
+  }
+}
+
+export async function getStaticPaths() {
+
+  const events = await getFeaturedEvents();
+
+  const paths = events.map(event => ({params: { eventId: event.id }}))
+  return {
+    paths,
+    fallback: "blocking"
+  }
 }
 
 export default EventDetailPage;
