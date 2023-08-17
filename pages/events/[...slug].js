@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 
+import Head from "next/head";
+
+
 import { getFilteredEvents} from "@/helpers/api-util";
 
 import EventList from "@/components/events/EventList";
 import ResultsTitle from "@/components/events/results-title";
 import Button from "@/components/UI/Button";
 import ErrorAlert from "@/components/UI/error-alert";
-import Head from "next/head";
 
 function FilteredEventsPage({ hasError, events, propsDate }) {
 

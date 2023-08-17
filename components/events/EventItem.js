@@ -1,10 +1,12 @@
 import Button from "@/components/UI/Button";
-
 import DateIcon from "@/components/UI/date-icon";
 import AddressIcon from "@/components/UI/address-icon";
 import ArrowRightIcon from "@/components/UI/arrow-right-icon";
 
+
+
 import classes from "./eventItem.module.css"
+import Image from "next/image";
 
 function EventItem({ item }) {
 
@@ -22,7 +24,7 @@ function EventItem({ item }) {
 
   return (
       <li className={classes.item}>
-        <img src={"/" + image} alt={title} />
+        <Image src={"/" + image} alt={title} width={250} height={150} />
         <div className={classes.content}>
           <div className={classes.summary}>
             <h2>{title}</h2>

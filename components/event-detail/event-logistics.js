@@ -3,6 +3,8 @@ import LogisticsItem from './logistics-item';
 import AddressIcon from "@/components/UI/address-icon";
 import DateIcon from "@/components/UI/date-icon";
 
+import Image from "next/image";
+
 import classes from './event-logistics.module.css';
 
 function EventLogistics({ date, address, image, imageAlt }) {
@@ -17,7 +19,7 @@ function EventLogistics({ date, address, image, imageAlt }) {
   return (
     <section className={classes.logistics}>
       <div className={classes.image}>
-        <img src={`/${image}`} alt={imageAlt} />
+        <Image src={`/${image}`} alt={imageAlt} width={400} height={400} />
       </div>
       <ul className={classes.list}>
         <LogisticsItem icon={DateIcon}>
